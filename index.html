@@ -1,0 +1,1113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nundresh Cold Store — Premium Apple Cold Storage, Kashmir</title>
+  <meta name="description" content="Nundresh Cold Store offers premium industrial apple cold storage in Kashmir. State-of-the-art temperature-controlled facilities." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Outfit:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --green: #2d7a3a;
+      --green-light: #4caf65;
+      --green-glow: #38d058;
+      --deep: #0a1a0d;
+      --cream: #f7f4ee;
+      --muted: #6b7c6e;
+      --border: rgba(45,122,58,0.18);
+      --white: #ffffff;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--cream);
+      color: #1a2e1d;
+      overflow-x: hidden;
+    }
+
+    /* ═══════════════ NAV ═══════════════ */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 5vw; height: 72px;
+      background: transparent;
+      transition: background 0.4s, box-shadow 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(10, 26, 13, 0.92);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 2px 30px rgba(0,0,0,0.3);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 11px; text-decoration: none; }
+    .nav-logo-icon {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; color: white;
+      box-shadow: 0 4px 16px rgba(56,208,88,0.3);
+    }
+    .nav-logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 700; color: white;
+      line-height: 1.1; letter-spacing: 0.01em;
+    }
+    .nav-logo-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: 0.55rem; color: rgba(255,255,255,0.45);
+      letter-spacing: 0.14em; text-transform: uppercase; display: block;
+    }
+    .nav-links { display: flex; gap: 4px; list-style: none; align-items: center; }
+    .nav-links a {
+      text-decoration: none; color: rgba(255,255,255,0.82);
+      font-size: 0.875rem; font-weight: 500;
+      padding: 8px 16px; border-radius: 8px; transition: all 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { background: rgba(255,255,255,0.1); color: white; }
+    .nav-cta {
+      background: var(--green) !important; color: white !important;
+      border-radius: 8px !important; font-weight: 600 !important;
+    }
+    .nav-cta:hover { background: var(--green-light) !important; transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 8px; border: none; background: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; transition: all 0.3s; }
+    @media (max-width: 768px) {
+      .hamburger { display: flex; }
+      .nav-links {
+        display: none; position: fixed; top: 72px; left: 0; right: 0;
+        background: rgba(10,26,13,0.97); backdrop-filter: blur(20px);
+        flex-direction: column; padding: 20px; gap: 4px;
+        border-bottom: 1px solid var(--border);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { width: 100%; text-align: center; padding: 12px; }
+    }
+
+    /* ═══════════════ HERO ═══════════════ */
+    .hero {
+      position: relative;
+      width: 100%; height: 100vh; min-height: 600px;
+      overflow: hidden;
+      display: flex; align-items: center;
+    }
+
+    /* Real photorealistic apple orchard background via CSS + Unsplash */
+/* ── VIDEO BACKGROUND ─────────────────────────────────────────────
+   position:absolute fills the hero section
+   object-fit:cover = always fills the frame without stretching
+   z-index:0 = sits BELOW all overlays and content
+   ────────────────────────────────────────────────────────────────── */
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  z-index: 0;
+  /* Force GPU layer for smooth playback */
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* ── ALL OVERLAYS & CONTENT sit above the video ──────────────────── */
+.hero-overlay-1 { position: absolute; inset: 0; z-index: 2 !important; }
+.hero-overlay-2 { position: absolute; inset: 0; z-index: 3 !important; }
+.hero-vignette  { position: absolute; inset: 0; z-index: 4 !important; }
+.hero-rays      { position: absolute; inset: 0; z-index: 3 !important; pointer-events: none; }
+.hero-grain     { position: absolute; inset: 0; z-index: 5 !important; pointer-events: none; }
+.hero-content   { position: relative; z-index: 10 !important; }
+.hero-stats     { z-index: 10 !important; }
+.scroll-indicator { z-index: 10 !important; }
+    @keyframes hero-pan {
+      0%   { transform: scale(1.05) translate(0, 0); }
+      100% { transform: scale(1.12) translate(-1.5%, 1%); }
+    }
+
+    /* Layered overlays for cinematic depth */
+    .hero-overlay-1 {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(
+        105deg,
+        rgba(5,15,7,0.88) 0%,
+        rgba(10,30,14,0.72) 40%,
+        rgba(5,15,7,0.25) 70%,
+        rgba(5,15,7,0.4) 100%
+      );
+    }
+    .hero-overlay-2 {
+      position: absolute; inset: 0; z-index: 3;
+      background: linear-gradient(to top, rgba(5,15,7,0.95) 0%, transparent 55%);
+    }
+    /* Subtle vignette */
+    .hero-vignette {
+      position: absolute; inset: 0; z-index: 4;
+      background: radial-gradient(ellipse at center, transparent 35%, rgba(0,0,0,0.45) 100%);
+    }
+
+    /* Film grain texture */
+    .hero-grain {
+      position: absolute; inset: 0; z-index: 5; opacity: 0.04; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 150px;
+      animation: grain 0.12s steps(1) infinite;
+    }
+    @keyframes grain {
+      0%  { background-position: 0 0; }
+      25% { background-position: -15px 8px; }
+      50% { background-position: 8px -12px; }
+      75% { background-position: -8px 15px; }
+    }
+
+    /* Subtle green light rays from orchard */
+    .hero-rays {
+      position: absolute; inset: 0; z-index: 3; pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 80% at 68% 30%, rgba(45,122,58,0.12) 0%, transparent 65%),
+        radial-gradient(ellipse 40% 50% at 30% 60%, rgba(56,208,88,0.06) 0%, transparent 60%);
+    }
+
+    /* ─── Hero Content ─── */
+    .hero-content {
+      position: relative; z-index: 10;
+      width: 100%; max-width: 1280px;
+      margin: 0 auto; padding: 0 6vw;
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 24px;
+      opacity: 0; transform: translateY(22px);
+      animation: fade-up 0.9s cubic-bezier(0.16,1,0.3,1) 0.3s forwards;
+    }
+    .hero-eyebrow-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: var(--green-glow);
+      box-shadow: 0 0 12px var(--green-glow), 0 0 24px rgba(56,208,88,0.4);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%,100% { box-shadow: 0 0 12px var(--green-glow), 0 0 24px rgba(56,208,88,0.4); }
+      50% { box-shadow: 0 0 20px var(--green-glow), 0 0 40px rgba(56,208,88,0.6); }
+    }
+    .hero-eyebrow-text {
+      font-family: 'Space Mono', monospace; font-size: 0.68rem;
+      letter-spacing: 0.24em; text-transform: uppercase; color: var(--green-glow);
+    }
+    .hero-eyebrow-sep { width: 1px; height: 14px; background: rgba(255,255,255,0.2); }
+
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.2rem, 9vw, 7.5rem);
+      font-weight: 900; color: white;
+      line-height: 0.93; letter-spacing: -0.025em;
+      margin-bottom: 14px; overflow: hidden;
+    }
+    .hero-title .line { overflow: hidden; display: block; }
+    .hero-title .word {
+      display: inline-block;
+      opacity: 0; transform: translateY(110%);
+      animation: word-rise 1s cubic-bezier(0.16,1,0.3,1) forwards;
+    }
+    .hero-title .w1 { animation-delay: 0.45s; }
+    .hero-title .w2 { animation-delay: 0.6s; }
+    .hero-title .w3 { animation-delay: 0.75s; color: var(--green-glow); font-style: italic; }
+    .hero-title .w4 { animation-delay: 0.9s; }
+    @keyframes word-rise { to { opacity: 1; transform: translateY(0); } }
+
+    .hero-sub {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.1rem, 2.8vw, 1.8rem);
+      font-weight: 400; font-style: italic;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 28px;
+      opacity: 0; animation: fade-up 0.9s ease 1.15s forwards;
+    }
+
+    .hero-desc {
+      font-size: clamp(0.92rem, 1.8vw, 1.05rem);
+      color: rgba(255,255,255,0.62); max-width: 500px;
+      line-height: 1.85; margin-bottom: 44px;
+      opacity: 0; animation: fade-up 0.9s ease 1.35s forwards;
+    }
+
+    .hero-btns {
+      display: flex; gap: 14px; flex-wrap: wrap;
+      opacity: 0; animation: fade-up 0.9s ease 1.55s forwards;
+    }
+    .hero-btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: white; color: var(--deep);
+      font-weight: 700; font-size: clamp(0.85rem, 1.7vw, 0.95rem);
+      padding: 16px 32px; border-radius: 100px;
+      text-decoration: none; transition: all 0.35s cubic-bezier(0.16,1,0.3,1);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+      letter-spacing: 0.01em;
+    }
+    .hero-btn-primary .arrow { transition: transform 0.3s; }
+    .hero-btn-primary:hover { transform: translateY(-4px); box-shadow: 0 18px 56px rgba(0,0,0,0.45); background: var(--green-glow); color: var(--deep); }
+    .hero-btn-primary:hover .arrow { transform: translate(4px, -4px); }
+    .hero-btn-outline {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: transparent; color: white;
+      font-weight: 600; font-size: clamp(0.85rem, 1.7vw, 0.95rem);
+      padding: 16px 32px; border-radius: 100px;
+      text-decoration: none; transition: all 0.3s;
+      border: 1.5px solid rgba(255,255,255,0.3);
+    }
+    .hero-btn-outline:hover { background: rgba(255,255,255,0.1); transform: translateY(-2px); border-color: rgba(255,255,255,0.5); }
+
+    /* Stats floating bottom-right */
+    .hero-stats {
+      position: absolute; bottom: 52px; right: 6vw; z-index: 10;
+      display: flex; gap: 10px; flex-wrap: wrap;
+      opacity: 0; animation: fade-up 0.9s ease 1.85s forwards;
+    }
+    @media (max-width: 768px) {
+      .hero-stats { position: static; margin-top: 36px; }
+    }
+    .hero-stat {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      backdrop-filter: blur(18px);
+      border-radius: 16px; padding: 18px 22px; text-align: center; min-width: 88px;
+      transition: background 0.3s;
+    }
+    .hero-stat:hover { background: rgba(255,255,255,0.13); }
+    .hero-stat-n {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: white; line-height: 1;
+    }
+    .hero-stat-l {
+      font-size: 0.62rem; color: rgba(255,255,255,0.4);
+      text-transform: uppercase; letter-spacing: 0.12em; margin-top: 5px;
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute; bottom: 36px; left: 50%; transform: translateX(-50%);
+      z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      opacity: 0; animation: fade-in 1s ease 2.5s forwards;
+    }
+    .scroll-indicator-text {
+      font-family: 'Space Mono', monospace; font-size: 0.58rem;
+      letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.28);
+    }
+    .scroll-mouse {
+      width: 22px; height: 36px; border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 12px; display: flex; justify-content: center; padding-top: 7px;
+    }
+    .scroll-dot {
+      width: 3px; height: 7px; background: rgba(255,255,255,0.4); border-radius: 2px;
+      animation: scroll-bounce 1.9s ease-in-out infinite;
+    }
+    @keyframes scroll-bounce { 0%{opacity:1;transform:translateY(0)} 100%{opacity:0;transform:translateY(13px)} }
+
+    /* ─── Ticker bar ─── */
+    .ticker-bar {
+      background: var(--deep); border-top: 1px solid rgba(45,122,58,0.25);
+      padding: 0; overflow: hidden; height: 48px; display: flex; align-items: center;
+    }
+    .ticker-track {
+      display: flex; gap: 0; white-space: nowrap;
+      animation: ticker-scroll 28s linear infinite;
+    }
+    .ticker-track:hover { animation-play-state: paused; }
+    .ticker-item {
+      display: flex; align-items: center; gap: 10px; padding: 0 32px;
+      font-family: 'Space Mono', monospace; font-size: 0.65rem;
+      letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.45);
+    }
+    .ticker-dot { width: 5px; height: 5px; background: var(--green-glow); border-radius: 50%; flex-shrink: 0; }
+    @keyframes ticker-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ═══════════════ TRUST BAR ═══════════════ */
+    .trust-bar { background: white; border-bottom: 1px solid rgba(45,122,58,0.1); padding: 0 6vw; }
+    .trust-bar-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: stretch; justify-content: space-between; flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex; align-items: center; gap: 14px; padding: 22px 20px; flex: 1;
+      border-right: 1px solid rgba(45,122,58,0.1); min-width: 180px; transition: background 0.2s;
+    }
+    .trust-item:last-child { border-right: none; }
+    .trust-item:hover { background: #f7faf7; }
+    .trust-icon-wrap {
+      width: 44px; height: 44px; border-radius: 11px; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+    }
+    .trust-text strong { display: block; font-size: 0.85rem; font-weight: 700; color: #1a2e1d; }
+    .trust-text span { font-size: 0.72rem; color: var(--muted); }
+
+    /* ═══════════════ WHY SECTION ═══════════════ */
+    .why-section { padding: 110px 6vw; background: var(--cream); }
+    .why-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    }
+    @media (max-width: 900px) { .why-inner { grid-template-columns: 1fr; gap: 50px; } }
+
+    .why-vis { position: relative; }
+    .why-card-main {
+      border-radius: 28px;
+      background: linear-gradient(155deg, #071209 0%, #0d2e12 50%, #1a5228 100%);
+      padding: clamp(40px,6vw,60px) clamp(32px,5vw,52px);
+      box-shadow: 0 40px 100px rgba(45,122,58,0.2), 0 0 0 1px rgba(56,208,88,0.08);
+      position: relative; overflow: hidden;
+    }
+    .why-card-main::after {
+      content: ''; position: absolute; width: 340px; height: 340px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(56,208,88,0.1) 0%, transparent 65%);
+      right: -80px; bottom: -80px; pointer-events: none;
+    }
+    .why-big-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(5rem, 12vw, 8rem); font-weight: 900; color: white; line-height: 1;
+      text-shadow: 0 0 60px rgba(56,208,88,0.2);
+    }
+    .why-big-label {
+      font-family: 'Space Mono', monospace; font-size: 0.7rem;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4); margin: 6px 0 36px;
+    }
+    .why-mini-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; position: relative; z-index: 1; }
+    .why-mini-stat {
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px; padding: 16px 18px;
+    }
+    .why-mini-val {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem,3vw,1.9rem); font-weight: 700; color: white; line-height: 1;
+    }
+    .why-mini-lbl { font-size: 0.68rem; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
+
+    .why-badge-float {
+      position: absolute; bottom: -16px; right: 20px;
+      background: white; border-radius: 18px; padding: 16px 22px;
+      box-shadow: 0 16px 56px rgba(0,0,0,0.18); display: flex; align-items: center; gap: 13px; z-index: 2;
+    }
+    .why-badge-icon { font-size: 2rem; }
+    .why-badge-text strong { display: block; font-size: 0.95rem; font-weight: 700; color: #1a2e1d; }
+    .why-badge-text span { font-size: 0.72rem; color: var(--muted); }
+
+    .why-features { display: flex; flex-direction: column; gap: 16px; }
+    .s-tag { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--green); margin-bottom: 12px; display: block; }
+    .s-title { font-family: 'Playfair Display', serif; font-size: clamp(2rem,5vw,3.2rem); font-weight: 700; color: #1a2e1d; line-height: 1.08; letter-spacing: -0.01em; margin-bottom: 14px; }
+    .s-desc { font-size: clamp(0.88rem,1.8vw,1rem); color: var(--muted); line-height: 1.85; max-width: 500px; margin-bottom: 32px; }
+    .idiv { width: 52px; height: 3px; background: linear-gradient(90deg, var(--green), var(--green-light)); border-radius: 2px; margin: 12px 0 28px; }
+    .idiv.c { margin: 12px auto 28px; }
+    .sh-c { text-align: center; }
+    .sh-c .s-desc { margin: 0 auto; }
+
+    .why-row {
+      display: flex; align-items: center; gap: 16px;
+      background: white; border: 1px solid rgba(45,122,58,0.1);
+      border-radius: 18px; padding: 18px 22px;
+      box-shadow: 0 2px 14px rgba(45,122,58,0.06); transition: all 0.3s;
+    }
+    .why-row:hover { transform: translateX(8px); box-shadow: 0 8px 32px rgba(45,122,58,0.12); border-color: rgba(45,122,58,0.25); }
+    .why-row-icon {
+      width: 46px; height: 46px; flex-shrink: 0; border-radius: 12px;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      display: flex; align-items: center; justify-content: center; font-size: 1.25rem;
+      box-shadow: 0 4px 14px rgba(45,122,58,0.25);
+    }
+    .why-row strong { display: block; font-size: 0.95rem; font-weight: 700; color: #1a2e1d; margin-bottom: 3px; }
+    .why-row span { font-size: 0.8rem; color: var(--muted); line-height: 1.5; }
+
+    /* ═══════════════ SERVICES PREVIEW ═══════════════ */
+    .svc-preview { padding: 110px 6vw; background: #f0f5f0; }
+    .svc-preview-inner { max-width: 1200px; margin: 0 auto; }
+    .svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; margin-top: 56px; }
+    @media (max-width: 900px) { .svc-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .svc-grid { grid-template-columns: 1fr; } }
+
+    .svc-card {
+      background: white; border-radius: 24px; overflow: hidden;
+      border: 1px solid rgba(45,122,58,0.1);
+      box-shadow: 0 4px 28px rgba(45,122,58,0.08);
+      transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+      display: flex; flex-direction: column;
+    }
+    .svc-card:hover { transform: translateY(-10px); box-shadow: 0 32px 80px rgba(45,122,58,0.16); }
+    .svc-top {
+      padding: clamp(28px,5vw,38px) clamp(24px,4vw,32px) clamp(22px,4vw,28px);
+      background: linear-gradient(155deg, #071209, #1a4a22); position: relative; overflow: hidden;
+    }
+    .svc-card:nth-child(2) .svc-top { background: linear-gradient(155deg, #0a2010, #1e6b2a); }
+    .svc-card:nth-child(3) .svc-top { background: linear-gradient(155deg, #041008, #145220); }
+    .svc-top::after {
+      content: ''; position: absolute; width: 200px; height: 200px; border-radius: 50%;
+      background: rgba(56,208,88,0.1); right: -60px; bottom: -60px; pointer-events: none;
+    }
+    .svc-icon { font-size: 2.4rem; margin-bottom: 14px; }
+    .svc-title { font-family: 'Playfair Display', serif; font-size: clamp(1.2rem,2.2vw,1.45rem); font-weight: 700; color: white; margin-bottom: 8px; }
+    .svc-sub { font-size: 0.82rem; color: rgba(255,255,255,0.5); line-height: 1.6; }
+    .svc-body { padding: clamp(22px,4vw,28px) clamp(24px,4vw,32px); flex: 1; display: flex; flex-direction: column; }
+    .svc-desc { font-size: 0.9rem; color: var(--muted); line-height: 1.8; margin-bottom: 18px; flex: 1; }
+    .svc-link { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; font-weight: 700; color: var(--green); text-decoration: none; transition: gap 0.2s; }
+    .svc-link:hover { gap: 12px; color: var(--green-light); }
+
+    /* ═══════════════ PROCESS ═══════════════ */
+    .process-sec { padding: 110px 6vw; background: white; }
+    .process-inner { max-width: 1200px; margin: 0 auto; }
+    .process-track {
+      display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+      margin-top: 56px; position: relative;
+    }
+    .process-track::before {
+      content: ''; position: absolute; top: 39px;
+      left: calc(10% + 20px); right: calc(10% + 20px);
+      height: 2px; background: linear-gradient(90deg, var(--green), var(--green-light)); z-index: 0;
+    }
+    @media (max-width: 800px) { .process-track { grid-template-columns: 1fr 1fr; } .process-track::before { display: none; } }
+    @media (max-width: 460px) { .process-track { grid-template-columns: 1fr; } }
+    .ps { display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 10px; position: relative; z-index: 1; }
+    .ps-num {
+      width: 78px; height: 78px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: white;
+      box-shadow: 0 8px 28px rgba(45,122,58,0.3); margin-bottom: 18px; transition: transform 0.3s;
+    }
+    .ps:hover .ps-num { transform: scale(1.1); }
+    .ps-title { font-weight: 700; font-size: 0.92rem; color: #1a2e1d; margin-bottom: 7px; }
+    .ps-text { font-size: 0.8rem; color: var(--muted); line-height: 1.65; }
+
+    /* ═══════════════ TESTIMONIALS ═══════════════ */
+    .testi-sec {
+      padding: 110px 6vw;
+      background: linear-gradient(155deg, #071209 0%, #0d2e12 55%, #122a16 100%);
+      position: relative; overflow: hidden;
+    }
+    .testi-sec::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1568702846914-96b305d2aaeb?w=1600&q=60&auto=format&fit=crop') center/cover;
+      opacity: 0.06;
+    }
+    .testi-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+    .testi-inner .s-title { color: white; }
+    .testi-inner .s-tag { color: var(--green-glow); }
+    .testi-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 52px;
+    }
+    @media (max-width: 900px) { .testi-grid { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 560px) { .testi-grid { grid-template-columns: 1fr; } }
+    .tc {
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px; padding: clamp(26px,4vw,34px); backdrop-filter: blur(14px); transition: all 0.3s;
+    }
+    .tc:hover { background: rgba(255,255,255,0.1); transform: translateY(-6px); }
+    .tc-q { font-family: 'Playfair Display', serif; font-size: 3.8rem; color: var(--green-glow); opacity: 0.4; line-height: 1; margin-bottom: -6px; }
+    .tc-text { font-family: 'Playfair Display', serif; font-size: clamp(1rem,2vw,1.25rem); color: rgba(255,255,255,0.88); line-height: 1.65; margin-bottom: 22px; }
+    .tc-stars { color: #f0c040; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 14px; }
+    .tc-author { display: flex; align-items: center; gap: 12px; }
+    .tc-av {
+      width: 42px; height: 42px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      display: flex; align-items: center; justify-content: center; font-size: 1.1rem; flex-shrink: 0;
+    }
+    .tc-name { font-weight: 700; color: white; font-size: 0.9rem; }
+    .tc-loc { font-size: 0.74rem; color: rgba(255,255,255,0.4); margin-top: 2px; }
+
+    /* ═══════════════ CTA ═══════════════ */
+    .cta-sec {
+      padding: 120px 6vw;
+      background: var(--cream); position: relative; overflow: hidden;
+    }
+    .cta-sec::before {
+      content: ''; position: absolute; width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(45,122,58,0.07) 0%, transparent 70%);
+      right: -150px; top: -150px; pointer-events: none;
+    }
+    .cta-inner { max-width: 700px; margin: 0 auto; text-align: center; position: relative; }
+    .cta-inner .s-title { font-size: clamp(2.2rem,6vw,4rem); }
+    .cta-inner p { font-size: 1rem; color: var(--muted); line-height: 1.85; margin-bottom: 48px; }
+    .cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-main {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: linear-gradient(135deg, var(--green), var(--green-light));
+      color: white; font-weight: 700; font-size: 0.95rem;
+      padding: 16px 34px; border-radius: 100px; text-decoration: none; transition: all 0.3s;
+      box-shadow: 0 8px 28px rgba(45,122,58,0.3);
+    }
+    .btn-main:hover { transform: translateY(-3px); box-shadow: 0 16px 48px rgba(45,122,58,0.44); }
+    .btn-sec {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: transparent; color: var(--green); font-weight: 600; font-size: 0.95rem;
+      padding: 16px 34px; border-radius: 100px; text-decoration: none; transition: all 0.3s;
+      border: 1.5px solid rgba(45,122,58,0.25);
+    }
+    .btn-sec:hover { border-color: var(--green); background: rgba(45,122,58,0.06); transform: translateY(-2px); }
+
+    /* ═══════════════ FOOTER ═══════════════ */
+    footer {
+      background: var(--deep); color: rgba(255,255,255,0.65);
+      padding: 80px 5vw 36px;
+    }
+    .footer-grid {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 56px; margin-bottom: 56px;
+    }
+    @media (max-width: 768px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } }
+    @media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+    .footer-brand .nav-logo-text { color: white; font-size: 1.5rem; }
+    .footer-brand .nav-logo-sub { color: rgba(255,255,255,0.35); }
+    .footer-tagline { font-size: 0.88rem; color: rgba(255,255,255,0.38); line-height: 1.75; margin-top: 18px; max-width: 240px; }
+    .footer-col h4 {
+      font-family: 'Space Mono', monospace; font-size: 0.66rem;
+      text-transform: uppercase; letter-spacing: 0.16em;
+      color: var(--green-glow); margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .footer-col a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.9rem; transition: color 0.2s; }
+    .footer-col a:hover { color: white; }
+    .footer-bottom {
+      max-width: 1200px; margin: 0 auto; padding-top: 28px;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+      font-size: 0.8rem; color: rgba(255,255,255,0.25);
+    }
+
+    /* ═══════════════ WHATSAPP FAB ═══════════════ */
+    .whatsapp-fab {
+      position: fixed; bottom: 30px; right: 30px; z-index: 999;
+      width: 60px; height: 60px; background: #25d366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; box-shadow: 0 6px 30px rgba(37,211,102,0.5);
+      transition: all 0.3s; animation: fab-pulse 2s ease-in-out 3s infinite;
+    }
+    .whatsapp-fab:hover { transform: scale(1.12) translateY(-3px); box-shadow: 0 12px 44px rgba(37,211,102,0.65); animation: none; }
+    .whatsapp-fab .tooltip {
+      position: absolute; right: 72px; top: 50%; transform: translateY(-50%);
+      background: #25d366; color: white; font-size: 0.78rem; font-weight: 600;
+      padding: 8px 14px; border-radius: 8px; white-space: nowrap;
+      opacity: 0; pointer-events: none; transition: opacity 0.2s;
+    }
+    .whatsapp-fab .tooltip::after {
+      content: ''; position: absolute; left: 100%; top: 50%; transform: translateY(-50%);
+      border: 6px solid transparent; border-left-color: #25d366;
+    }
+    .whatsapp-fab:hover .tooltip { opacity: 1; }
+    @keyframes fab-pulse { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+
+    /* ═══════════════ REVEAL ═══════════════ */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.75s ease, transform 0.75s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+
+    /* Shared anims */
+    @keyframes fade-up { to { opacity: 1; transform: translateY(0); } }
+    @keyframes fade-in { to { opacity: 1; } }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-logo" href="index.html">
+    <div class="nav-logo-icon">❄</div>
+    <div>
+      <span class="nav-logo-text">Nundresh Cold Store</span>
+      <span class="nav-logo-sub">Kashmir · Est. 2008</span>
+    </div>
+  </a>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="gallery.html">Gallery</a></li>
+    <li><a href="contact.html" class="nav-cta">Book Storage</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <!-- 
+    VIDEO SETUP:
+    - Place your video file at: /video/rehan2.mp4 in your project root
+    - Vercel will serve it from: yourdomain.vercel.app/video/rehan2.mp4
+    - The poster image shows while video loads (fallback from Unsplash)
+    - preload="auto" tells browser to load video immediately
+    - playsinline is REQUIRED for iOS autoplay
+    - muted is REQUIRED for autoplay in all browsers
+  -->
+  <!-- VIDEO ONLY: remove poster/fallback image -->
+  <video class="hero-video" autoplay muted loop playsinline>
+  <source src="https://res.cloudinary.com/dc9fwyzq2/video/upload/v1778977334/rehan2_mc0pvz.mp4" type="video/mp4">
+</video>
+  <div class="hero-overlay-1"></div>
+  <div class="hero-overlay-2"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-rays"></div>
+  <div class="hero-grain"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-dot"></div>
+      <span class="hero-eyebrow-text">Kashmir · Established 2008</span>
+      <div class="hero-eyebrow-sep"></div>
+      <span class="hero-eyebrow-text" style="opacity:0.55">Grade A Apple Storage</span>
+    </div>
+
+    <h1 class="hero-title">
+      <span class="line">
+        <span class="word w1">The cold</span>&nbsp;<span class="word w2">that keeps</span>
+      </span>
+      <span class="line">
+        <span class="word w3">Kashmir</span>&nbsp;<span class="word w4" style="animation-delay:0.92s">crisp.</span>
+      </span>
+    </h1>
+
+    <p class="hero-sub">Engineered for Kashmir's finest apple harvest.</p>
+
+    <p class="hero-desc">
+      Precision temperature control, managed humidity, and quiet logistics — built for growers and exporters who refuse to compromise on quality.
+    </p>
+
+    <div class="hero-btns">
+      <a href="contact.html" class="hero-btn-primary">
+        Book a storage tour
+        <span class="arrow">↗</span>
+      </a>
+      <a href="services.html" class="hero-btn-outline">Our services</a>
+    </div>
+  </div>
+
+  <!-- Stats -->
+  <div class="hero-stats" id="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-n">5000+</div>
+      <div class="hero-stat-l">MT Capacity</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">-2°C</div>
+      <div class="hero-stat-l">Precision</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">17yr</div>
+      <div class="hero-stat-l">Experience</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-n">24/7</div>
+      <div class="hero-stat-l">Monitoring</div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="scroll-indicator">
+    <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    <span class="scroll-indicator-text">Scroll</span>
+  </div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-bar">
+  <div class="ticker-track">
+    <!-- first set -->
+    <div class="ticker-item"><span class="ticker-dot"></span>Precision Cold Storage</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Apple Grade A Storage</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>CA Controlled Atmosphere</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Fruit Storage Facility Kashmir</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Temperature Monitoring 24/7</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Grading & Packing Services</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Export Logistics Kashmir</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Since 2008 · Est. Kashmir</div>
+    <!-- duplicate for seamless loop -->
+    <div class="ticker-item"><span class="ticker-dot"></span>Precision Cold Storage</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Apple Grade A Storage</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>CA Controlled Atmosphere</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Fruit Storage Facility Kashmir</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Temperature Monitoring 24/7</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Grading & Packing Services</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Export Logistics Kashmir</div>
+    <div class="ticker-item"><span class="ticker-dot"></span>Since 2008 · Est. Kashmir</div>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">
+      <div class="trust-icon-wrap">🌡️</div>
+      <div class="trust-text"><strong>±0.5°C Precision</strong><span>Industrial refrigeration</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon-wrap">🏔️</div>
+      <div class="trust-text"><strong>Kashmir's Largest</strong><span>Apple cold store network</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon-wrap">⚡</div>
+      <div class="trust-text"><strong>100% Power Backup</strong><span>Auto-switch generators</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon-wrap">📦</div>
+      <div class="trust-text"><strong>5,000+ MT Capacity</strong><span>Regular & CA chambers</span></div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon-wrap">🚚</div>
+      <div class="trust-text"><strong>Logistics Support</strong><span>Pan-India distribution</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- WHY NUNDRESH -->
+<section class="why-section">
+  <div class="why-inner">
+    <div class="why-vis reveal">
+      <div class="why-card-main">
+        <div class="why-big-num">17</div>
+        <div class="why-big-label">Years of Trust in Kashmir</div>
+        <div class="why-mini-grid">
+          <div class="why-mini-stat">
+            <div class="why-mini-val">5000+</div>
+            <div class="why-mini-lbl">MT Capacity</div>
+          </div>
+          <div class="why-mini-stat">
+            <div class="why-mini-val">99.8%</div>
+            <div class="why-mini-lbl">Uptime</div>
+          </div>
+          <div class="why-mini-stat">
+            <div class="why-mini-val">1–9°C</div>
+            <div class="why-mini-lbl">Temp Range</div>
+          </div>
+          <div class="why-mini-stat">
+            <div class="why-mini-val">85–95%</div>
+            <div class="why-mini-lbl">Humidity</div>
+          </div>
+        </div>
+      </div>
+      <div class="why-badge-float">
+        <div class="why-badge-icon">🏆</div>
+        <div class="why-badge-text">
+          <strong>ISO Certified</strong>
+          <span>Quality assured storage</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <span class="s-tag reveal">Why Nundresh</span>
+      <h2 class="s-title reveal">Built for Kashmir's<br>apple growers.</h2>
+      <div class="idiv reveal"></div>
+      <p class="s-desc reveal">We don't just store apples — we preserve livelihoods. Every chamber, every sensor, every process is designed around Kashmir's unique climate, harvest cycles, and export demands.</p>
+
+      <div class="why-features">
+        <div class="why-row reveal reveal-d1">
+          <div class="why-row-icon">❄️</div>
+          <div><strong>Controlled Atmosphere (CA) Storage</strong><span>Oxygen-reduced chambers extend shelf life by 4–6 months — keeping apples market-fresh longer.</span></div>
+        </div>
+        <div class="why-row reveal reveal-d2">
+          <div class="why-row-icon">🌡️</div>
+          <div><strong>Precision Temperature Management</strong><span>Industrial sensors maintain ±0.5°C accuracy. Real-time alerts and SMS notifications for every deviation.</span></div>
+        </div>
+        <div class="why-row reveal reveal-d3">
+          <div class="why-row-icon">📊</div>
+          <div><strong>Digital Tracking & Reporting</strong><span>Every consignment tagged, logged, and traceable. Transparent condition reports on request.</span></div>
+        </div>
+        <div class="why-row reveal">
+          <div class="why-row-icon">⚡</div>
+          <div><strong>Zero Downtime Guarantee</strong><span>Dual-circuit power with auto-switching diesel backup. Sub-30-second failover ensures continuous operation.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES PREVIEW -->
+<section class="svc-preview">
+  <div class="svc-preview-inner">
+    <div class="sh-c reveal">
+      <span class="s-tag">Our Services</span>
+      <h2 class="s-title">End-to-end apple care.</h2>
+      <div class="idiv c"></div>
+      <p class="s-desc">From harvest intake to export dispatch — every step managed with precision and care.</p>
+    </div>
+    <div class="svc-grid">
+      <div class="svc-card reveal reveal-d1">
+        <div class="svc-top">
+          <div class="svc-icon">🏔️</div>
+          <div class="svc-title">Cold Storage</div>
+          <div class="svc-sub">Regular refrigerated chambers for short to mid-season storage</div>
+        </div>
+        <div class="svc-body">
+          <p class="svc-desc">Industrial-grade refrigeration maintaining 1–4°C with controlled humidity. Suitable for all Kashmir apple varieties from harvest through seasonal distribution.</p>
+          <a href="services.html" class="svc-link">Learn more →</a>
+        </div>
+      </div>
+      <div class="svc-card reveal reveal-d2">
+        <div class="svc-top">
+          <div class="svc-icon">🧪</div>
+          <div class="svc-title">CA Storage</div>
+          <div class="svc-sub">Controlled atmosphere for extended shelf life</div>
+        </div>
+        <div class="svc-body">
+          <p class="svc-desc">Oxygen-controlled sealed chambers that slow metabolism and dramatically extend storage life — keeping Delicious varieties crisp and fresh for 6+ months.</p>
+          <a href="services.html" class="svc-link">Learn more →</a>
+        </div>
+      </div>
+      <div class="svc-card reveal reveal-d3">
+        <div class="svc-top">
+          <div class="svc-icon">📦</div>
+          <div class="svc-title">Grading & Packing</div>
+          <div class="svc-sub">Professional sorting and export-ready packing</div>
+        </div>
+        <div class="svc-body">
+          <p class="svc-desc">Size, colour and quality grading with professional carton packing. Custom labeling and export documentation support for domestic and international markets.</p>
+          <a href="services.html" class="svc-link">Learn more →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-sec">
+  <div class="process-inner">
+    <div class="sh-c reveal">
+      <span class="s-tag">How It Works</span>
+      <h2 class="s-title">Simple. Reliable. Efficient.</h2>
+      <div class="idiv c"></div>
+    </div>
+    <div class="process-track">
+      <div class="ps reveal reveal-d1">
+        <div class="ps-num">01</div>
+        <div class="ps-title">Intake & Inspection</div>
+        <p class="ps-text">Apples received, weighed, and visually inspected. Each consignment logged with unique ID.</p>
+      </div>
+      <div class="ps reveal reveal-d2">
+        <div class="ps-num">02</div>
+        <div class="ps-title">Pre-Cooling</div>
+        <p class="ps-text">Rapid field-heat removal in pre-cooling chambers before main storage placement.</p>
+      </div>
+      <div class="ps reveal reveal-d3">
+        <div class="ps-num">03</div>
+        <div class="ps-title">Chamber Storage</div>
+        <p class="ps-text">Allocated to regular or CA chamber based on variety and required storage duration.</p>
+      </div>
+      <div class="ps reveal">
+        <div class="ps-num">04</div>
+        <div class="ps-title">Monitoring</div>
+        <p class="ps-text">24/7 sensor monitoring with automated alerts and periodic condition reports.</p>
+      </div>
+      <div class="ps reveal">
+        <div class="ps-num">05</div>
+        <div class="ps-title">Dispatch</div>
+        <p class="ps-text">Grading, packing, and logistics coordination at your chosen time. Documentation ready.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-sec">
+  <div class="testi-inner">
+    <div class="sh-c reveal">
+      <span class="s-tag">What Growers Say</span>
+      <h2 class="s-title" style="color:white;">Trusted by Kashmir's finest.</h2>
+      <div class="idiv c"></div>
+    </div>
+    <div class="testi-grid">
+      <div class="tc reveal reveal-d1">
+        <div class="tc-q">"</div>
+        <p class="tc-text">My Delicious apples came out of CA storage after five months looking and tasting as if they'd just been picked. Nundresh is simply in a different class.</p>
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-author">
+          <div class="tc-av">🍎</div>
+          <div><div class="tc-name">Farooq Ahmad Bhat</div><div class="tc-loc">Orchard Owner · Sopore</div></div>
+        </div>
+      </div>
+      <div class="tc reveal reveal-d2">
+        <div class="tc-q">"</div>
+        <p class="tc-text">The temperature never wavered once during three months of storage. The digital reports gave me full confidence to plan my exports months in advance.</p>
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-author">
+          <div class="tc-av">🌿</div>
+          <div><div class="tc-name">Mohammad Yusuf Lone</div><div class="tc-loc">Grower-Exporter · Shopian</div></div>
+        </div>
+      </div>
+      <div class="tc reveal reveal-d3">
+        <div class="tc-q">"</div>
+        <p class="tc-text">What separates Nundresh is the people — they genuinely care about your harvest. From intake to dispatch everything is smooth, transparent, and professional.</p>
+        <div class="tc-stars">★★★★★</div>
+        <div class="tc-author">
+          <div class="tc-av">🏔️</div>
+          <div><div class="tc-name">Irfan Wani</div><div class="tc-loc">Large-Scale Grower · Pulwama</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-sec">
+  <div class="cta-inner">
+    <span class="s-tag" style="text-align:center;display:block;">Book Your Slot</span>
+    <h2 class="s-title reveal" style="text-align:center;">Ready to secure<br>your harvest?</h2>
+    <div class="idiv c reveal"></div>
+    <p class="reveal">Season fills fast. Contact us today to confirm your storage slot, get a quote, or arrange a facility tour. Our team responds within hours.</p>
+    <div class="cta-btns reveal">
+      <a href="contact.html" class="btn-main">📬 Book Storage Now</a>
+      <a href="tel:+919876543210" class="btn-sec">📞 Call Us Directly</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="index.html" style="margin-bottom:18px;display:inline-flex;text-decoration:none;">
+        <div class="nav-logo-icon">❄</div>
+        <div><span class="nav-logo-text">Nundresh Cold Store</span><span class="nav-logo-sub">Kashmir · Est. 2008</span></div>
+      </a>
+      <p class="footer-tagline">Preserving Kashmir's finest apples with industrial cold chain precision since 2008.</p>
+    </div>
+    <div class="footer-col"><h4>Pages</h4><ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Services</h4><ul>
+      <li><a href="services.html">Cold Storage</a></li>
+      <li><a href="services.html">CA Storage</a></li>
+      <li><a href="services.html">Grading & Packing</a></li>
+      <li><a href="services.html">Logistics</a></li>
+    </ul></div>
+    <div class="footer-col"><h4>Contact</h4><ul>
+      <li><a href="tel:+919876543210">+91 98765 43210</a></li>
+      <li><a href="mailto:info@nundreshcoldstore.com">info@nundreshcoldstore.com</a></li>
+      <li><a href="#">Nundresh, Kashmir, J&K</a></li>
+    </ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Nundresh Cold Store. All rights reserved.</span>
+    <span>Kashmir, India</span>
+  </div>
+</footer>
+
+<!-- WHATSAPP FAB -->
+<a href="https://wa.me/919876543210?text=Hello%2C%20I%27m%20interested%20in%20cold%20storage%20at%20Nundresh%20Cold%20Store"
+   class="whatsapp-fab" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <span class="tooltip">Chat on WhatsApp</span>
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+/* NAV */
+const nb = document.getElementById('navbar');
+window.addEventListener('scroll', () => nb.classList.toggle('scrolled', scrollY > 40));
+const hbg = document.getElementById('hamburger');
+hbg.addEventListener('click', () => {
+  document.getElementById('nav-links').classList.toggle('open');
+  hbg.classList.toggle('open');
+});
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => {
+  document.getElementById('nav-links').classList.remove('open');
+  hbg.classList.remove('open');
+}));
+
+/* STATS placement */
+function placeStats() {
+  const s = document.getElementById('hero-stats');
+  const hero = document.querySelector('.hero');
+  const content = document.querySelector('.hero-content');
+  if (!s) return;
+  if (window.innerWidth <= 768) {
+    if (s.parentElement !== content) content.appendChild(s);
+  } else {
+    if (s.parentElement !== hero) hero.appendChild(s);
+  }
+}
+placeStats(); window.addEventListener('resize', placeStats);
+
+/* REVEAL */
+const rvls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(es => es.forEach(e => {
+  if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+}), { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+rvls.forEach(r => obs.observe(r));
+
+/* ══════════════════════════════════════════════════════════════════
+   VIDEO AUTOPLAY FIX
+   ──────────────────────────────────────────────────────────────────
+   Browsers (especially mobile) sometimes block autoplay even with
+   `muted` + `playsinline`. This script:
+   1. Detects if the video failed to start automatically
+   2. Forces play() via JS — the only reliable way across all browsers
+   3. If video file is missing (404), keeps the poster image visible
+      and falls back to the Unsplash background seamlessly
+   ══════════════════════════════════════════════════════════════════ */
+(function () {
+  const video = document.querySelector('.hero-video');
+  if (!video) return;
+
+  // Force the correct attributes programmatically (belt + suspenders)
+  video.muted    = true;
+  video.loop     = true;
+  video.autoplay = true;
+
+  // Attempt to play — this is required on mobile Safari and some Android browsers
+  function attemptPlay() {
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(function (err) {
+        // Autoplay was blocked — this is fine, poster image stays visible
+        console.warn('Video autoplay blocked by browser:', err.message);
+        // On user interaction, try again
+        document.addEventListener('touchstart', function onTouch() {
+          video.play().catch(function(){});
+          document.removeEventListener('touchstart', onTouch);
+        }, { once: true });
+        document.addEventListener('click', function onClick() {
+          video.play().catch(function(){});
+          document.removeEventListener('click', onClick);
+        }, { once: true });
+      });
+    }
+  }
+
+  // Wait for canplay event, then force play
+  if (video.readyState >= 3) {
+    // Already enough data buffered
+    attemptPlay();
+  } else {
+    video.addEventListener('canplay', attemptPlay, { once: true });
+    video.addEventListener('loadedmetadata', attemptPlay, { once: true });
+  }
+
+  // Handle video file not found (404 or wrong path)
+  video.addEventListener('error', function () {
+    console.warn('Video file not found or failed to load.');
+    // Hide video on error (no fallback image)
+    video.style.display = 'none';
+  });
+
+  // Visibility API: pause when tab is hidden, resume when visible (battery saving)
+  document.addEventListener('visibilitychange', function () {
+    if (document.hidden) {
+      video.pause();
+    } else {
+      video.play().catch(function(){});
+    }
+  });
+})();
+</script>
+</body>
+</html>
